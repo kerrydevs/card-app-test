@@ -54,7 +54,8 @@ services:
       - card_app_test_network
 
   node:
-    image: node:14
+    build:
+      context: ./frontend
     container_name: card_app_test_node_app
     volumes:
       - ./frontend:/usr/src/app
