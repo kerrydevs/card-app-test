@@ -1,0 +1,72 @@
+version: '1.1'
+
+services:
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: card-app-test-app
+    container_name: card_app_test_app
+    volumes:
+      - ./backend:/var/www/html
+    networks:
+      - card_app_test_network
+
+  web:
+    image: nginx:alpine
+    container_name: card_app_test_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./backend:/var/www/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+    networks:
+      - card_app_test_network
+
+  db:
+    image: mysql:8.0
+    container_name: card_app_test_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: card_app_test_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - card_app_test_network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: card_app_test_phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    depends_on:
+      - db
+    networks:
+      - card_app_test_network
+
+  node:
+    image: node:14
+    container_name: card_app_test_node_app
+    volumes:
+      - ./frontend:/usr/src/app
+    working_dir: /usr/src/app
+    ports:
+      - "3000:3000"
+    command: npm start
+    networks:
+      - card_app_test_network
+
+volumes:
+  db_data:
+
+networks:
+  card_app_test_network:

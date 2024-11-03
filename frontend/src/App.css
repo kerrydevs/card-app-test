@@ -1,0 +1,18 @@
+#app-container {
+    background: linear-gradient(135deg, #d7c4bb, #554236);
+    min-height: 100vh;
+    height: 100%;
+    display: flex;
+    color: #fff;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active {
+    background-color: #554236;
+}
+
+.btn-primary:hover, .btn-primary:active {
+    opacity: 0.8;
+}
