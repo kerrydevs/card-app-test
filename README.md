@@ -44,6 +44,13 @@
    php artisan migrate:fresh --seed
    ```
 
+7. **Create a copy of the `.env` file for frontend**:
+
+   ```bash
+   cd <project_directory>/frontend
+   cp .env.local.example .env
+   ```
+
 ## Access Information
 
 You may access the project through frontend [http://localhost:3000](http://localhost:3000) with the following credentials:
@@ -53,4 +60,5 @@ You may access the project through frontend [http://localhost:3000](http://local
 
 ## Additional Information
 
-Refer to the [Laravel Documentation](https://laravel.com/docs/11.x) for more details on how to work with Laravel.
+- Refer to the [Laravel Documentation](https://laravel.com/docs/11.x) for more details on how to work with Laravel.
+- Irregularity occurred when spam random cards request more than 20 times in one minute.

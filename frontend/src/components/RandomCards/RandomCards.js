@@ -14,7 +14,7 @@ const RandomCards = () => {
         setError('');
 
         // Call to backend login api
-        const randomCardsApi = 'http://localhost:8080/api/card/random';
+        const randomCardsApi = process.env.REACT_APP_API_URL + '/card/random';
         const token = localStorage.getItem('token');
 
         try {
@@ -29,7 +29,7 @@ const RandomCards = () => {
             if (response.status !== 200) {
                 let errorData = await response.json();
                 setError(errorData.error);
-                console.log(errorData.error);
+                setPeoples([]);
             } else {
                 const results = await response.json();
                 setResults(results);
@@ -47,10 +47,8 @@ const RandomCards = () => {
                 setPeoples(peopleList);
             }
         } catch (error) {
-            console.log(error);
-            // if (error.message) {
-            //     setError(error.message);
-            // }
+            setError("Request Error");
+            setPeoples([]);
         } finally {
             setLoading(false);
         }
