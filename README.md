@@ -1,10 +1,10 @@
-# Project Setup Guide
+# A. Card App
 
 ## Prerequisites
 
 - Docker Desktop installation
 
-## Installation Steps
+## Setup Steps
 
 1. **Clone the repository**:
 
@@ -62,3 +62,24 @@ You may access the project through frontend [http://localhost:3000](http://local
 
 - Refer to the [Laravel Documentation](https://laravel.com/docs/11.x) for more details on how to work with Laravel.
 - Irregularity occurred when spam random cards request more than 20 times in one minute.
+
+
+
+# B. Query Improvement
+
+## Prerequisites
+
+- Complete setup in (A)
+
+## Setup Steps
+
+1. **Run database migrations with seeding for backend**:
+
+   ```docker app bash
+   php artisan migrate --path=database/migrations/jobs
+   php artisan db:seed --class=JobsSeeder
+   ```
+
+## Access Information
+
+You may view the query results, logical improvements, new query, and old query through frontend [http://localhost:8080/job/query-results](http://localhost:8080/job/query-results).
